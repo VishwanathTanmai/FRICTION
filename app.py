@@ -33,6 +33,18 @@ app.config['JSON_SORT_KEYS'] = False
 nlp = NLPEngine()
 
 
+@app.before_request
+def setup_db_for_vercel():
+    """Lazily initialize database for serverless environments."""
+    if not os.path.exists(DB_PATH):
+        try:
+            init_db()
+            from seed_data import seed_database
+            seed_database(DB_PATH)
+        except Exception:
+            pass
+
+
 def get_connection():
     """Get database connection for current request."""
     if 'db' not in g:

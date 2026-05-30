@@ -8,7 +8,10 @@ import os
 import json
 from datetime import datetime
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixmyitch.db')
+if os.environ.get('VERCEL'):
+    DB_PATH = '/tmp/fixmyitch.db'
+else:
+    DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'fixmyitch.db')
 
 CATEGORIES = [
     {'id': 1, 'name': 'Health', 'icon': '🏥', 'color': '#EF4444'},
