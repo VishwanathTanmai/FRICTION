@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Friction{% endblock %}
+
+{% block body %}
+<section class="section-spacing mt-5 pt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 fade-up">
+                <h1 class="display-md mb-4 fw-bold">Privacy Policy</h1>
+                <p class="text-muted mb-5">Last updated: May 30, 2026</p>
+
+                <div class="glass-panel p-5 rounded-4 border border-1 border-opacity-10 text-secondary lh-lg">
+                    <h4 class="text-white fw-bold mt-4 mb-3">1. Information We Collect</h4>
+                    <p>While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to: Email address, First name and last name, and Usage Data.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">2. Use of Data</h4>
+                    <p>Friction uses the collected data for various purposes, including: to provide and maintain the Service, to notify you about changes to our Service, to provide customer care and support, and to monitor the usage of the Service.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">3. Data Security</h4>
+                    <p>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. We use industry-standard hashing to protect your passwords and require an Access Key for login, but we cannot guarantee absolute security.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">4. Disclosure of Data</h4>
+                    <p>Friction will not sell, rent, or lease your personal information to third parties. We may disclose your Personal Data in the good faith belief that such action is necessary to comply with a legal obligation or protect the personal safety of users.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">5. Your Data Rights</h4>
+                    <p>You have the right to request access to, correction of, or deletion of your personal data stored on our platform. You can update your profile information directly through your Account settings.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">6. Contact Us</h4>
+                    <p>If you have any questions about this Privacy Policy, please contact us by visiting the Friction homepage and submitting an inquiry.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Footer -->
+<footer class="footer text-center mt-5">
+    <div class="container">
+        <div class="footer-content border-top border-secondary border-opacity-25 pt-5">
+            <div class="footer__brand mb-4">
+                <span class="gradient-text" style="font-weight: 800; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 1px;">FRICTION</span>
+            </div>
+            <div class="footer-links my-4 d-flex justify-content-center gap-4 flex-wrap">
+                <a href="{{ url_for('index') }}" class="text-decoration-none text-muted">Home</a>
+                <a href="{{ url_for('about') }}" class="text-decoration-none text-muted">About</a>
+                <a href="{{ url_for('terms') }}" class="text-decoration-none text-muted">Terms</a>
+                <a href="{{ url_for('privacy') }}" class="text-decoration-none text-muted">Privacy</a>
+            </div>
+            <div class="footer__bottom mt-5">
+                <p class="footer-copy text-muted small">&copy; 2026 Friction. Built for Founders.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .glass-panel {
+        background: var(--bg-card);
+        backdrop-filter: blur(10px);
+    }
+</style>
+{% endblock %}

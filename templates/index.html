@@ -1,0 +1,451 @@
+{% extends "base.html" %}
+
+{% block body %}
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- NAVBAR                                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- HERO SECTION                                            -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="hero-section" id="hero">
+    <div class="noise-overlay"></div>
+    <div class="hero-float hero-float-1"></div>
+    <div class="hero-float hero-float-2"></div>
+
+    <div class="container hero-content">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <p class="hero-subtitle text-uppercase fade-up">FOR FOUNDERS & BUILDERS</p>
+
+                <h1 class="display-hero fade-up stagger-1">
+                    <span class="counter" data-target="{{ stats.total_problems }}">0</span>+
+                    Real Problems<br>
+                    <span class="gradient-text">Worth Solving</span>
+                </h1>
+
+                <p class="hero-subtitle fade-up stagger-2">
+                    Every frustration is a startup waiting to happen.<br>
+                    Discover problems faced by millions of Indians — analyzed, scored, and ready for builders.
+                </p>
+
+                <div class="hero-cta-group fade-up stagger-3">
+                    <a href="#scratch-section" class="btn btn-primary-custom btn-lg magnetic-btn">
+                        <i class="bi bi-stars me-2"></i>Scratch & Discover
+                    </a>
+                    <a href="#all-problems" class="btn btn-outline-custom btn-lg magnetic-btn">
+                        Browse All Problems <i class="bi bi-arrow-down ms-2"></i>
+                    </a>
+                </div>
+
+                <div class="stats-grid fade-up stagger-4" style="margin-top: 3rem;">
+                    <div class="stat-item">
+                        <span class="stat-item__number counter" data-target="{{ stats.categories }}">0</span>
+                        <span class="stat-item__label">Categories</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-item__number">{{ stats.avg_frustration }}</span>
+                        <span class="stat-item__label">Avg Frustration</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span class="stat-item__number gradient-text">NLP</span>
+                        <span class="stat-item__label">Powered Analysis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-indicator fade-up stagger-5">
+        <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+        </div>
+        <span>Scroll to explore</span>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- EMOTIONAL HOOK                                          -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="editorial-section section-spacing">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <blockquote class="editorial-quote text-reveal-words fade-up">
+                    Every time someone says <em class="text-editorial">"why can't I just..."</em>
+                    — that's not a complaint. That's a
+                    <span class="gradient-text">billion-dollar question</span>
+                    waiting for an answer.
+                </blockquote>
+                <p class="editorial-attribution fade-up stagger-1">
+                    We scraped, analyzed, and scored thousands of real frustrations using NLP — so you can find the problem worth your next 10 years.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SCRATCH TO REVEAL                                       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="scratch-section section-spacing" id="scratch-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <p class="section-eyebrow fade-up">INTERACTIVE DISCOVERY</p>
+                <h2 class="display-lg fade-up stagger-1">
+                    Scratch to Uncover<br>
+                    <span class="text-editorial">a Problem Worth Solving</span>
+                </h2>
+                <p class="section-subtitle fade-up stagger-2">
+                    Drag your cursor across the card below to reveal a hidden startup opportunity.
+                </p>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-7 col-md-9">
+                <div class="scratch-card-wrapper fade-up stagger-3" id="scratchCardContainer">
+                    <canvas id="scratchCanvas" width="600" height="340" class="scratch-card-canvas"></canvas>
+                    <div class="scratch-card-reveal" id="scratchRevealContent">
+                        <div class="scratch-problem-loading">
+                            <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                            <span>Loading a problem...</span>
+                        </div>
+                    </div>
+                    <p class="scratch-instruction">
+                        <i class="bi bi-hand-index"></i> Scratch the card above
+                    </p>
+                </div>
+                <div class="text-center mt-4 fade-up stagger-4 scratch-actions">
+                    <button class="btn btn-outline-custom magnetic-btn" id="newScratchBtn" onclick="loadNewScratchProblem()">
+                        <i class="bi bi-arrow-clockwise me-2"></i>Reveal Another Problem
+                    </button>
+                    <button class="btn btn-primary-custom magnetic-btn ms-2" id="fetchLiveBtn" onclick="fetchLiveProblems()">
+                        <i class="bi bi-globe2 me-2"></i>Fetch Live from Internet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- TOP PROBLEMS SHOWCASE                                   -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="top-problems-section section-spacing" id="problems-section">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <p class="section-eyebrow fade-up">HIGHEST RATED</p>
+                <h2 class="display-lg fade-up stagger-1">
+                    Problems That Keep<br>
+                    <span class="gradient-text">India Up at Night</span>
+                </h2>
+                <p class="section-subtitle fade-up stagger-2 mt-3 mx-auto" style="max-width: 600px;">
+                    Ranked by our NLP engine for frustration intensity, market size, and solvability.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            {% for problem in top_problems %}
+            <div class="col-lg-4 col-md-6 fade-up stagger-{{ loop.index % 4 + 1 }}">
+                <div class="problem-card {% if loop.index <= 2 %}problem-card-featured{% endif %}" data-id="{{ problem.id }}">
+                    <div class="problem-card__header">
+                        <span class="tag tag-category" style="--cat-color: {{ (categories | selectattr('name', 'equalto', problem.category) | first).color if categories | selectattr('name', 'equalto', problem.category) | first else '#2563EB' }}">
+                            {{ problem.category }}
+                        </span>
+                        <span class="problem-rank">#{{ loop.index }}</span>
+                    </div>
+
+                    <h3 class="problem-card__title">{{ problem.title }}</h3>
+
+                    {% if problem.description %}
+                    <p class="problem-card__description">{{ problem.description[:120] }}{% if problem.description|length > 120 %}...{% endif %}</p>
+                    {% endif %}
+
+                    <div class="problem-card-scores">
+                        <div class="score-meter-inline">
+                            <div class="score-meter">
+                                <div class="score-meter__fill" style="width: {{ problem.overall_score }}%" data-score="{{ problem.overall_score }}"></div>
+                            </div>
+                            <div class="score-meter__number">{{ "%.0f"|format(problem.overall_score) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="problem-card__meta">
+                        {% if problem.root_cause %}
+                        <div class="root-cause-tag">
+                            <i class="bi bi-bullseye"></i>
+                            <span>{{ problem.root_cause[:60] }}{% if problem.root_cause|length > 60 %}...{% endif %}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="problem-card__footer">
+                        <div class="problem-scores-mini">
+                            <span title="Frustration"><i class="bi bi-fire"></i> {{ "%.0f"|format(problem.frustration_score) }}</span>
+                            <span title="Market Size"><i class="bi bi-graph-up"></i> {{ "%.0f"|format(problem.market_size_score) }}</span>
+                            <span title="Solvability"><i class="bi bi-tools"></i> {{ "%.0f"|format(problem.solvability_score) }}</span>
+                        </div>
+                        <button class="btn-upvote" onclick="upvoteProblem({{ problem.id }}, this)" title="Upvote">
+                            <i class="bi bi-arrow-up-circle"></i>
+                            <span>{{ problem.upvotes }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- STATS SECTION                                           -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="stats-section">
+    <div class="container">
+        <div class="stats-grid fade-up">
+            <div class="stat-item">
+                <span class="stat-item__number gradient-text counter" data-target="{{ stats.total_problems }}">0</span>
+                <span class="stat-item__label">Problems Analyzed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-item__number gradient-text counter" data-target="{{ stats.categories }}">0</span>
+                <span class="stat-item__label">Categories</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-item__number gradient-text">{{ stats.avg_frustration }}</span>
+                <span class="stat-item__label">Avg. Frustration Score</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-item__number gradient-text">{{ stats.avg_score }}</span>
+                <span class="stat-item__label">Avg. Overall Score</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ALL PROBLEMS (Full Database)                            -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="all-problems-section section-spacing" id="all-problems">
+    <div class="container">
+        <div class="row mb-5 justify-content-center text-center">
+            <div class="col-lg-10">
+                <h2 class="display-lg fade-up stagger-1">
+                    All Problems,<br>
+                    <span class="gradient-text">All Opportunities</span>
+                </h2>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-wrapper fade-up stagger-2">
+            <div class="search-bar">
+                <i class="bi bi-search search-bar__icon"></i>
+                <input type="text" id="searchInput" class="search-bar__input"
+                       placeholder="Search problems... e.g. 'healthcare in rural areas'" autocomplete="off">
+                <div class="search-analyzing" id="searchAnalyzing" style="display:none">
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                </div>
+            </div>
+            <div class="search-nlp-preview" id="searchNlpPreview" style="display:none">
+                <span class="nlp-badge">NLP Analysis</span>
+                <span id="searchNlpScore"></span>
+            </div>
+        </div>
+
+        <!-- Category Filter -->
+        <div class="category-filter-bar fade-up stagger-3" id="categoryFilter">
+            <button class="category-filter-btn magnetic-btn active" data-category="All" onclick="filterByCategory('All', this)">
+                All <span class="filter-count">{{ stats.total_problems }}</span>
+            </button>
+            {% for cat in categories %}
+            {% if cat.problem_count > 0 %}
+            <button class="category-filter-btn magnetic-btn" data-category="{{ cat.name }}" onclick="filterByCategory('{{ cat.name }}', this)">
+                {{ cat.icon }} {{ cat.name }} <span class="filter-count">{{ cat.problem_count }}</span>
+            </button>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Sort Controls -->
+        <div class="sort-controls fade-up stagger-3">
+            <span class="sort-label">Sort by:</span>
+            <button class="sort-btn active" data-sort="overall_score" onclick="sortProblems('overall_score', this)">
+                <i class="bi bi-trophy"></i> Score
+            </button>
+            <button class="sort-btn" data-sort="frustration_score" onclick="sortProblems('frustration_score', this)">
+                <i class="bi bi-fire"></i> Frustration
+            </button>
+            <button class="sort-btn" data-sort="market_size_score" onclick="sortProblems('market_size_score', this)">
+                <i class="bi bi-graph-up"></i> Market
+            </button>
+            <button class="sort-btn" data-sort="solvability_score" onclick="sortProblems('solvability_score', this)">
+                <i class="bi bi-tools"></i> Solvability
+            </button>
+            <button class="sort-btn" data-sort="created_at" onclick="sortProblems('created_at', this)">
+                <i class="bi bi-clock"></i> Recent
+            </button>
+        </div>
+
+        <!-- Problems Grid -->
+        <div class="row g-4" id="problemsGrid">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Loading -->
+        <div class="text-center py-5" id="problemsLoading" style="display:none">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Load More -->
+        <div class="text-center mt-5" id="loadMoreContainer" style="display:none">
+            <button class="btn btn-outline-custom btn-lg" id="loadMoreBtn" onclick="loadMoreProblems()">
+                <i class="bi bi-plus-circle me-2"></i>Load More Problems
+            </button>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display:none">
+            <i class="bi bi-search"></i>
+            <h3>No problems found</h3>
+            <p>Try a different search term or category filter.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- SUBMIT YOUR ITCH                                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<section class="submit-section section-spacing" id="submit-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <p class="section-eyebrow fade-up">CONTRIBUTE</p>
+                <h2 class="display-lg fade-up stagger-1">
+                    Got a Frustration?<br>
+                    <span class="text-editorial">Submit Your Itch</span>
+                </h2>
+                <p class="section-subtitle fade-up stagger-2">
+                    Describe a problem you face. Our NLP engine will analyze it in real-time.
+                </p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-7">
+                <div class="submit-form fade-up stagger-3">
+                    <form id="submitForm" onsubmit="submitProblem(event)">
+                        <div class="mb-4">
+                            <textarea id="submitText" class="form-control form-custom__input" rows="4"
+                                      placeholder="Describe a real problem you or others face..."
+                                      oninput="liveAnalyze(this.value)" required minlength="20"></textarea>
+                        </div>
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <select id="submitCategory" class="form-select form-custom__input">
+                                    <option value="General">Select Category</option>
+                                    {% for cat in all_categories %}
+                                    <option value="{{ cat.name }}">{{ cat.icon }} {{ cat.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" id="submitEmail" class="form-control form-custom__input"
+                                       placeholder="Email (required for notification)" required>
+                            </div>
+                        </div>
+
+                        <!-- Live NLP Preview -->
+                        <div class="form-live-preview" id="liveAnalysis" style="display:none">
+                            <h4 class="live-analysis-title">
+                                <i class="bi bi-cpu"></i> Live NLP Analysis
+                            </h4>
+                            <div class="live-scores">
+                                <div class="live-score-item">
+                                    <span class="live-score-label">Frustration</span>
+                                    <div class="score-meter"><div class="score-meter__fill" id="liveFrustration" style="width:0%"></div></div>
+                                    <span class="live-score-value" id="liveFrustrationVal">0</span>
+                                </div>
+                                <div class="live-score-item">
+                                    <span class="live-score-label">Market Size</span>
+                                    <div class="score-meter"><div class="score-meter__fill" id="liveMarket" style="width:0%"></div></div>
+                                    <span class="live-score-value" id="liveMarketVal">0</span>
+                                </div>
+                                <div class="live-score-item">
+                                    <span class="live-score-label">Solvability</span>
+                                    <div class="score-meter"><div class="score-meter__fill" id="liveSolvability" style="width:0%"></div></div>
+                                    <span class="live-score-value" id="liveSolvabilityVal">0</span>
+                                </div>
+                                <div class="live-score-item overall">
+                                    <span class="live-score-label">Overall Score</span>
+                                    <div class="score-meter"><div class="score-meter__fill" id="liveOverall" style="width:0%"></div></div>
+                                    <span class="live-score-value gradient-text" id="liveOverallVal">0</span>
+                                </div>
+                            </div>
+                            <div class="live-details" id="liveDetails">
+                                <div class="live-root-cause" id="liveRootCause" style="display:none">
+                                    <i class="bi bi-bullseye"></i> <strong>Root Cause:</strong> <span id="liveRootCauseText"></span>
+                                </div>
+                                <div class="live-keywords" id="liveKeywords" style="display:none">
+                                    <i class="bi bi-tags"></i> <strong>Keywords:</strong> <span id="liveKeywordsText"></span>
+                                </div>
+                            </div>
+                        </div></div>
+
+                        <button type="submit" class="btn btn-primary-custom btn-lg w-100 magnetic-btn" id="submitBtn">
+                            <i class="bi bi-send me-2"></i>Submit & Analyze
+                        </button>
+                    </form>
+
+                    <!-- Success State -->
+                    <div class="submit-success" id="submitSuccess" style="display:none">
+                        <div class="submit-success-icon">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <h3>Problem Submitted!</h3>
+                        <p>Your frustration has been analyzed and recorded. Together, we'll find builders to solve it.</p>
+                        <button class="btn btn-outline-custom" onclick="resetSubmitForm()">
+                            Submit Another
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer__brand">
+                <span class="gradient-text" style="font-weight: 800; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 1px;">FRICTION</span>
+                <p class="footer__tagline">Turning frustrations into opportunities.</p>
+            </div>
+            <div class="footer-links my-4">
+                <a href="#hero" class="mx-2">Home</a>
+                <a href="#all-problems" class="mx-2">Problems</a>
+                <a href="#scratch-section" class="mx-2">Discover</a>
+                <a href="#submit-section" class="mx-2">Submit</a>
+                <a href="{{ url_for('terms') }}" class="mx-2">Terms</a>
+                <a href="{{ url_for('privacy') }}" class="mx-2">Privacy</a>
+            </div>
+            <div class="footer__bottom">
+                <p>Built with NLP analysis &bull; No external APIs &bull; Pure Python intelligence</p>
+                <p class="footer-copy">&copy; 2026 Friction.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endblock %}

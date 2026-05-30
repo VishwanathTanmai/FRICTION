@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Terms & Conditions — Friction{% endblock %}
+
+{% block body %}
+<section class="section-spacing mt-5 pt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 fade-up">
+                <h1 class="display-md mb-4 fw-bold">Terms and Conditions</h1>
+                <p class="text-muted mb-5">Last updated: May 30, 2026</p>
+
+                <div class="glass-panel p-5 rounded-4 border border-1 border-opacity-10 text-secondary lh-lg">
+                    <h4 class="text-white fw-bold mt-4 mb-3">1. Acceptance of Terms</h4>
+                    <p>By accessing or using the Friction platform, you agree to be bound by these Terms and Conditions. If you disagree with any part of the terms, you may not access the service.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">2. Description of Service</h4>
+                    <p>Friction provides a platform for discovering, tracking, and analyzing real-world problems and inefficiencies. The platform uses NLP to categorize and score user-submitted content to aid startup founders in ideation.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">3. User Accounts and Security</h4>
+                    <p>When you create an account with us, you must provide accurate and complete information. You are entirely responsible for maintaining the confidentiality of your password and the unique Access Key provided upon registration. You agree to notify us immediately of any unauthorized use of your account.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">4. Intellectual Property</h4>
+                    <p>The Service and its original content, features, and functionality are and will remain the exclusive property of Friction and its licensors. Our trademarks may not be used in connection with any product or service without the prior written consent of Friction.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">5. User Contributions</h4>
+                    <p>By submitting problems, frustrations, or content to Friction, you grant us the right to use, modify, publicly perform, publicly display, reproduce, and distribute such content on and through the Service.</p>
+
+                    <h4 class="text-white fw-bold mt-4 mb-3">6. Changes</h4>
+                    <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Footer -->
+<footer class="footer text-center mt-5">
+    <div class="container">
+        <div class="footer-content border-top border-secondary border-opacity-25 pt-5">
+            <div class="footer__brand mb-4">
+                <span class="gradient-text" style="font-weight: 800; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 1px;">FRICTION</span>
+            </div>
+            <div class="footer-links my-4 d-flex justify-content-center gap-4 flex-wrap">
+                <a href="{{ url_for('index') }}" class="text-decoration-none text-muted">Home</a>
+                <a href="{{ url_for('about') }}" class="text-decoration-none text-muted">About</a>
+                <a href="{{ url_for('terms') }}" class="text-decoration-none text-muted">Terms</a>
+                <a href="{{ url_for('privacy') }}" class="text-decoration-none text-muted">Privacy</a>
+            </div>
+            <div class="footer__bottom mt-5">
+                <p class="footer-copy text-muted small">&copy; 2026 Friction. Built for Founders.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .glass-panel {
+        background: var(--bg-card);
+        backdrop-filter: blur(10px);
+    }
+</style>
+{% endblock %}

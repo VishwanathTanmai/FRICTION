@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block body %}
+<section class="profile-section section-spacing mt-5">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="display-sm fade-up">My Profile</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 fade-up stagger-1">
+                <div class="glass-panel p-5">
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('profile') }}">
+                        
+                        <div class="mb-4">
+                            <label class="form-label text-muted small text-uppercase">Email Address</label>
+                            <input type="email" class="form-control form-custom__input" value="{{ user.email }}" disabled>
+                            <div class="form-text">Email cannot be changed.</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-muted small text-uppercase">First Name</label>
+                                <input type="text" name="first_name" class="form-control form-custom__input" value="{{ user.first_name }}" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-muted small text-uppercase">Middle Name</label>
+                                <input type="text" name="middle_name" class="form-control form-custom__input" value="{{ user.middle_name }}">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-muted small text-uppercase">Last Name</label>
+                                <input type="text" name="last_name" class="form-control form-custom__input" value="{{ user.last_name }}" required>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 text-end">
+                            <button type="submit" class="btn btn-primary-custom magnetic-btn">Save Changes</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .glass-panel {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+</style>
+{% endblock %}

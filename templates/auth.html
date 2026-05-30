@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block body %}
+<section class="auth-section section-spacing">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="glass-panel p-5 text-center">
+                    
+                    {% if is_signup %}
+                        <h2 class="display-sm mb-2">Create Account</h2>
+                        <p class="text-muted mb-4">Join Friction and start scratching problems.</p>
+                    {% else %}
+                        <h2 class="display-sm mb-2">Welcome Back</h2>
+                        <p class="text-muted mb-4">Enter your credentials and access key to continue.</p>
+                    {% endif %}
+
+                    <!-- Flash Messages specifically for Auth -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }} alert-dismissible fade show text-start" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('signup') if is_signup else url_for('signin') }}" class="text-start">
+                        
+                        {% if is_signup %}
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-muted small text-uppercase">First Name</label>
+                                <input type="text" name="first_name" class="form-control form-custom__input" required>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-muted small text-uppercase">Middle Name</label>
+                                <input type="text" name="middle_name" class="form-control form-custom__input">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label text-muted small text-uppercase">Last Name</label>
+                                <input type="text" name="last_name" class="form-control form-custom__input" required>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <div class="mb-3">
+                            <label class="form-label text-muted small text-uppercase">Email Address</label>
+                            <input type="email" name="email" class="form-control form-custom__input" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-muted small text-uppercase">Password</label>
+                            <input type="password" name="password" class="form-control form-custom__input" required minlength="6">
+                        </div>
+
+                        {% if is_signup %}
+                        <div class="mb-4">
+                            <label class="form-label text-muted small text-uppercase">Confirm Password</label>
+                            <input type="password" name="confirm_password" class="form-control form-custom__input" required minlength="6">
+                        </div>
+                        <div class="mb-4 form-check">
+                            <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                            <label class="form-check-label text-muted small" for="termsCheck">
+                                I agree to the <a href="{{ url_for('terms') }}" class="text-primary text-decoration-none" target="_blank">Terms & Conditions</a> and <a href="{{ url_for('privacy') }}" class="text-primary text-decoration-none" target="_blank">Privacy Policy</a>
+                            </label>
+                        </div>
+                        {% else %}
+                        <div class="mb-4">
+                            <label class="form-label text-muted small text-uppercase">Access Key <span class="text-info" style="font-size: 0.7em;">(Required for first-time login only)</span></label>
+                            <input type="text" name="access_key" class="form-control form-custom__input" autocomplete="off" placeholder="Leave blank if already verified">
+                        </div>
+                        {% endif %}
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary-custom magnetic-btn">
+                                {% if is_signup %} Create Account {% else %} Sign In {% endif %}
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="mt-4">
+                        {% if is_signup %}
+                            <p class="small text-muted">Already have an account? <a href="{{ url_for('signin') }}" class="text-primary text-decoration-none">Sign In</a></p>
+                        {% else %}
+                            <p class="small text-muted">Don't have an account? <a href="{{ url_for('signup') }}" class="text-primary text-decoration-none">Sign Up</a></p>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Styling overrides for Auth specific forms */
+    .glass-panel {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .auth-section {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}About Friction — How It Helps Founders{% endblock %}
+
+{% block body %}
+<section class="about-hero section-spacing mt-5 pt-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center fade-up">
+                <span class="gradient-text fw-bold text-uppercase tracking-wider mb-2 d-block">About Friction</span>
+                <h1 class="display-md mb-4 fw-bold">Don't build solutions in search of a problem. <br><span class="text-muted">Start with the problem.</span></h1>
+                <p class="lead text-secondary mb-5">
+                    Friction is an intelligence platform designed exclusively for startup founders and builders. We surface real, validated frustrations from everyday users so you can build what people actually need.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-features py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-md-4 fade-up stagger-1">
+                <div class="glass-panel p-4 h-100 border border-1 border-opacity-10 rounded-4">
+                    <div class="icon-box mb-4 text-primary">
+                        <i class="bi bi-radar" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3">Discover Hidden Needs</h3>
+                    <p class="text-secondary mb-0">
+                        Stop guessing what the market wants. We aggregate thousands of real complaints, feature requests, and workflow bottlenecks from across the web, giving you direct access to genuine pain points.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 fade-up stagger-2">
+                <div class="glass-panel p-4 h-100 border border-1 border-opacity-10 rounded-4">
+                    <div class="icon-box mb-4 text-success">
+                        <i class="bi bi-cpu" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3">NLP-Powered Analysis</h3>
+                    <p class="text-secondary mb-0">
+                        Our intelligent NLP engine automatically scores problems based on frustration levels, potential market size, and solvability. You don't just see a complaint; you see its viability as a startup idea.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-4 fade-up stagger-3">
+                <div class="glass-panel p-4 h-100 border border-1 border-opacity-10 rounded-4">
+                    <div class="icon-box mb-4 text-warning">
+                        <i class="bi bi-rocket-takeoff" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3">Accelerate Ideation</h3>
+                    <p class="text-secondary mb-0">
+                        Whether you are a solo hacker looking for a weekend project or a VC-backed team searching for a pivot, Friction gives you a curated pipeline of vetted problems waiting to be solved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-cta section-spacing text-center py-5 mb-5">
+    <div class="container fade-up stagger-4">
+        <div class="glass-panel p-5 rounded-4 bg-primary bg-opacity-10 border border-primary border-opacity-25">
+            <h2 class="fw-bold mb-3">Ready to find your next startup idea?</h2>
+            <p class="text-secondary mb-4 max-w-600 mx-auto">Join the community of founders who build solutions for real friction.</p>
+            {% if 'user_id' not in session %}
+                <a href="{{ url_for('signup') }}" class="btn btn-primary-custom magnetic-btn px-5 py-3 rounded-pill fw-bold">Get Started Now</a>
+            {% else %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary-custom magnetic-btn px-5 py-3 rounded-pill fw-bold">Go to Dashboard</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Include Footer -->
+<footer class="footer text-center mt-5">
+    <div class="container">
+        <div class="footer-content border-top border-secondary border-opacity-25 pt-5">
+            <div class="footer__brand mb-4">
+                <span class="gradient-text" style="font-weight: 800; font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 1px;">FRICTION</span>
+                <p class="footer__tagline mt-2 text-secondary fst-italic">Turning frustrations into opportunities.</p>
+            </div>
+            <div class="footer-links my-4 d-flex justify-content-center gap-4 flex-wrap">
+                <a href="{{ url_for('index') }}" class="text-decoration-none text-muted">Home</a>
+                <a href="{{ url_for('about') }}" class="text-decoration-none text-muted">About</a>
+                {% if 'user_id' in session %}
+                    <a href="{{ url_for('dashboard') }}#all-problems" class="text-decoration-none text-muted">Problems</a>
+                {% endif %}
+            </div>
+            <div class="footer__bottom mt-5">
+                <p class="text-muted small mb-2">Built with NLP analysis &bull; No external APIs &bull; Pure Python intelligence</p>
+                <p class="footer-copy text-muted small">&copy; 2026 Friction. Built for Founders.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+    .glass-panel {
+        background: var(--bg-card);
+        backdrop-filter: blur(10px);
+    }
+    .icon-box i {
+        background: linear-gradient(135deg, currentColor, transparent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+    .tracking-wider {
+        letter-spacing: 0.1em;
+    }
+    .max-w-600 {
+        max-width: 600px;
+    }
+</style>
+{% endblock %}
