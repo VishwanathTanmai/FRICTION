@@ -314,6 +314,20 @@ def create_user(conn, first_name, middle_name, last_name, email, password_hash, 
 
 
 def get_user_by_email(conn, email):
+    # Hardcoded demo user for Vercel serverless testing
+    if email.lower() == 'demo@friction.com':
+        from werkzeug.security import generate_password_hash
+        return {
+            'id': 9999,
+            'first_name': 'Demo',
+            'middle_name': '',
+            'last_name': 'User',
+            'email': 'demo@friction.com',
+            'password_hash': generate_password_hash('demo'),
+            'access_key': 'demo_key',
+            'access_key_verified': 1
+        }
+        
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM users WHERE email = ?', (email,))
     user = cursor.fetchone()
@@ -321,6 +335,20 @@ def get_user_by_email(conn, email):
 
 
 def get_user_by_id(conn, user_id):
+    # Hardcoded demo user for Vercel serverless testing
+    if user_id == 9999:
+        from werkzeug.security import generate_password_hash
+        return {
+            'id': 9999,
+            'first_name': 'Demo',
+            'middle_name': '',
+            'last_name': 'User',
+            'email': 'demo@friction.com',
+            'password_hash': generate_password_hash('demo'),
+            'access_key': 'demo_key',
+            'access_key_verified': 1
+        }
+        
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM users WHERE id = ?', (user_id,))
     user = cursor.fetchone()
